@@ -38,6 +38,9 @@ from schemas import JournalCreate, JournalUpdate
 
 app = FastAPI(title="SoulSync API")
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 @app.post("/users", status_code=201)
 def create_user(
