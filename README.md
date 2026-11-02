@@ -10,8 +10,8 @@
 
 ```json
 {
-  "name": "Curl Test User",
-  "email": "sundram5696@gmail.com"
+  "name": "Test User",
+  "email": "test@example.com"
 }
 ```
 
