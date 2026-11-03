@@ -133,3 +133,67 @@ curl.exe -i "http://127.0.0.1:8000/journals?skip=-1&limit=5"
 **Actual Status:** 422 Unprocessable Content
 
 **Result:** The API correctly rejected the negative `skip` value because pagination requires `skip >= 0`.
+
+
+## Running Locally with Docker
+
+### Requirements
+- Docker Desktop
+- Docker Compose
+- Git
+
+### Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/tiwariji2007/day-2.git
+cd day-2
+```
+
+2. Create your local environment file:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+3. Open `.env` and set your own PostgreSQL password. Do not commit this file to GitHub.
+
+4. Start FastAPI and PostgreSQL:
+
+```bash
+docker compose up --build
+```
+
+5. Open the API documentation:
+
+http://localhost:8000/docs
+
+The default local API port is 8000. If you set `API_PORT=8001`, use port 8001 instead.
+
+### Stop the Application
+
+```bash
+docker compose down
+```
+
+PostgreSQL data is stored in a Docker named volume and survives normal container restarts.
+
+## Live Deployment
+
+**Platform:** Eigon
+
+**Environment:** dev
+
+**Live API:** https://soulsync-api-5189-app.eigon.app
+
+**Health Check:** https://soulsync-api-5189-app.eigon.app/health
+
+**API Documentation:** https://soulsync-api-5189-app.eigon.app/docs
+
+## Setup Feedback
+
+- Docker Compose needed careful configuration of PostgreSQL environment variables.
+- Special characters in the PostgreSQL password caused URL-parsing issues. This was addressed using SQLAlchemy's `URL.create()`.
+- Eigon's GitHub integration did not clearly explain the scope of repository access.
+- Creating an additional Dev environment initially failed because of environment limitations on the free plan.
